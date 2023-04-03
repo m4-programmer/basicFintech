@@ -59,7 +59,7 @@ class HomeController extends Controller
         }
         // Send money to beneficiary account
         $sendMoney = User::where('account_number',$request->account_number)->increment('balance',$request->amount);
-        // HomeController::sendTransactionMail($amount);
+        HomeController::sendTransactionMail($amount);
         // Deduct money from sender account
         $deductMoney = User::where('id', auth()->user()->id)->decrement('balance',$amount);
         // send mail to reciever of funds
