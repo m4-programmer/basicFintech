@@ -28,6 +28,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Network::class);
     }
+    public function beneficiary()
+    {
+        return $this->hasMany(Beneficiary::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

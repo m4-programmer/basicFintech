@@ -30,6 +30,21 @@
                     <h4>Acccount Balance: &#8358;{{auth()->user()->balance}}</h4>
                     <p>Referral Link: <a href="{{url('/register?ref='.auth()->user()->referral_id)}}">{{url('/register?ref='.auth()->user()->referral_id)}}</a></p>
 
+                    <form action="{{route('subscribe')}}">
+                        <h3>Subscribe to Mail Notification</h3>
+                        
+                         
+                        <input type="checkbox" name="join" <?php if (auth()->user()->is_subscribed == 1): ?>
+                            checked
+                        <?php endif ?>> Yes
+                        <?php if (auth()->user()->is_subscribed == 1): ?>
+                            <button class="btn btn-danger">UnSubscribe</button>
+                        <?php else: ?>
+                            <button class="btn btn-primary">Subscribe</button>
+                        <?php endif ?>
+                        
+                    </form>
+
                     <hr>
 
                     <form action="{{url('topUp')}}" method="post" class="m-auto w-50">
@@ -61,7 +76,22 @@
                             {{ session('error_balance') }}
                         </div>
                          @endif
+
                         <div class="form-input py-1">
+                            <label>Choose Beneficiary</label>
+                            <select name="beneficiary" class="form-control">
+                                <option value="0">Select Beneficiary</option>
+                                <?php foreach ($beneficiary as $key): ?>
+                                <option value="{{$key->user->account_number}}">{{$key->user->account_number}}</option>
+                                <?php endforeach ?>
+                            </select>                           
+                        </div>
+                         @if (session('error_account'))
+                        <div class="alert alert-danger py-1" role="alert">
+                            {{ session('error_account') }}
+                        </div>
+                         @endif
+                         <div class="form-input py-1">
                             <label>Account Number</label>
                             <input type="text" name="account_number" class="form-control @error('account_number') is-invalid @enderror" value="{{ old('account_number') }}">
                         </div>
@@ -87,6 +117,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        <input type="checkbox" name="save"> Save User as Beneficiary
 
                         <div class="text-center mt-3">
                             <button class="btn btn-primary">Send</button>
@@ -112,6 +143,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    
+    function subscribe(e){
+        
+        alert("yes am subscribe"+ e.value)
+    }
 </script>
 @endsection

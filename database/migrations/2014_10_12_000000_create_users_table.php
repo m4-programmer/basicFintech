@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('referral_id')->nullable();
             $table->string('password');
             $table->string('account_number')->nullable();
+            $table->enum('is_subscribed',[1,0])->default(0);
             $table->integer('balance')->default(0);
             $table->enum('role_as',['0','1'])->default('0');
             $table->rememberToken();

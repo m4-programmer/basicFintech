@@ -11,6 +11,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/topUp', [App\Http\Controllers\HomeController::class, 'topUp'])->name('topUp');
 Route::post('/sendMoney', [App\Http\Controllers\HomeController::class, 'sendMoney'])->name('sendMoney');
+Route::get('/subscribe', [App\Http\Controllers\HomeController::class, 'subscribe'])->name('subscribe');
 
 // To create route to handle sending and recieving of money
 
